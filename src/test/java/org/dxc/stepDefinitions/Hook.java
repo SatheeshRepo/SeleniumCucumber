@@ -1,23 +1,27 @@
-package org.dxc.stepDefinitions;
+package org.orange.hrm.automation.stepDefinitions;
 
 import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.WebDriver;
-import org.dxc.base.TestBase;
+import org.orange.hrm.automation.base.TestBase;
+
+import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Hook extends TestBase {
 
     public static String scenarioName;
     WebDriver driver;
+    String targetBrowser = "chrome";
+    Scenario lscenario;
 
     @Before
     public void before(Scenario scenario) throws Exception {
         scenarioName = scenario.getName();
-        initSetup();
-        getScenario(scenario);
+        initSetup(targetBrowser);
         driver = getDriver();
+        lscenario = scenario;
     }
 
     @After
@@ -33,9 +37,4 @@ public class Hook extends TestBase {
         tearDown();
     }
 
-//    @AfterStep
-//    public void afterStep(Scenario scenario) throws Exception
-//    {
-//        scenario.attach(getByteScreenshot(), "image/png", "screenshot");
-//    }
 }
