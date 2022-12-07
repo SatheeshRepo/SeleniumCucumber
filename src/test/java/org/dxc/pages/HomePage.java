@@ -21,7 +21,7 @@ public class HomePage extends TestBase{
     public HomePage()
     {
         globalConstants = new GlobalConstants();
-        generic = new Generic(TestBase.driver);
+        generic = new Generic(TestBase.ldriver,TestBase.lscenario);
         homePageObjects = new HomePage.HomePageObjects();
         PageFactory.initElements(getDriver(),homePageObjects);
     }

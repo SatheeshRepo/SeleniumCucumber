@@ -1,5 +1,6 @@
 package org.dxc.common;
 
+import io.cucumber.java.Scenario;
 import org.dxc.stepDefinitions.Hook;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
@@ -10,10 +11,12 @@ public class Generic {
 
     GlobalConstants globalConstants;
     WebDriver driver;
+    Scenario scenario;
 
-    public Generic(WebDriver ldriver){
+    public Generic(WebDriver ldriver,Scenario lscenario){
 
         this.driver = ldriver;
+        this.scenario = lscenario;
         globalConstants = new GlobalConstants();
     }
 
@@ -85,6 +88,7 @@ public class Generic {
 
     public void getElementByteScreenshot(WebElement element) {
         byte[] screenshot = element.getScreenshotAs(OutputType.BYTES);
+        scenario.attach(screenshot,"image/png","elementScreenshot");
     }
 
 

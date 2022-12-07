@@ -23,7 +23,7 @@ public class ContactUsPage extends TestBase {
     public ContactUsPage()
     {
         globalConstants = new GlobalConstants();
-        generic = new Generic(TestBase.driver);
+        generic = new Generic(TestBase.ldriver,TestBase.lscenario);
         contactUsObjects = new ContactUsPage.ContactUsObjects();
         PageFactory.initElements(getDriver(),contactUsObjects);
     }
@@ -49,6 +49,7 @@ public class ContactUsPage extends TestBase {
      */
     public void navigateToContactUs() throws Exception {
         generic.waitForShortTimeOut();
+        generic.getElementByteScreenshot(contactUsObjects.contactUsLink);
         contactUsObjects.contactUsLink.click();
     }
 
@@ -90,6 +91,7 @@ public class ContactUsPage extends TestBase {
         Select dropDown = new Select(contactUsObjects.countryDropDown);
         dropDown.selectByValue(dataTable.asLists().get(1).get(6));
         contactUsObjects.commentTextBox.sendKeys(dataTable.asLists().get(1).get(7));
+        generic.getElementByteScreenshot(contactUsObjects.queryContainer);
     }
 
     /**
@@ -103,6 +105,7 @@ public class ContactUsPage extends TestBase {
             isButtonEnabled =true;
         }
         return isButtonEnabled;
+
     }
 
 
@@ -113,9 +116,10 @@ public class ContactUsPage extends TestBase {
        ######################                                      #######################
        ###################################################################################
    */
-    static class ContactUsObjects {
 
-        @FindBy(xpath ="//button[contains(@class,'onetrust-close-btn-handler onetrust-close-btn-ui banner-close-button ot-close-icon')]")
+    class ContactUsObjects {
+        public final static String a= "//button[contains(@class,'onetrust-close-btn-handler onetrust-close-btn-ui banner-close-button ot-close-icon')]";
+        @FindBy(xpath = a)
         @CacheLookup
         private WebElement cookiesPopUp;
 
@@ -162,5 +166,9 @@ public class ContactUsPage extends TestBase {
         @FindBy(xpath ="//button[@id='formSubmitSales']")
         @CacheLookup
         private WebElement submitButton;
+
+        @FindBy(xpath ="//div[@class='cmp-accordion__panel cmp-accordion__panel--expanded']")
+        @CacheLookup
+        private WebElement queryContainer;
     }
 }

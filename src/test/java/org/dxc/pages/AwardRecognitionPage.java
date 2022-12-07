@@ -29,7 +29,7 @@ public class AwardRecognitionPage extends TestBase {
     public AwardRecognitionPage()
     {
         globalConstants = new GlobalConstants();
-        generic = new Generic(TestBase.driver);
+        generic = new Generic(TestBase.ldriver,TestBase.lscenario);
         homePage = new HomePage();
         awardRecognitionObjects = new AwardRecognitionObjects();
         PageFactory.initElements(getDriver(),awardRecognitionObjects);
@@ -39,7 +39,7 @@ public class AwardRecognitionPage extends TestBase {
     public void navigateToAwardsLink() throws InterruptedException {
         awardRecognitionObjects.aboutUsLink.click();
         generic.waitForMediumTimeOut();
-        WebDriverWait wt = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wt = new WebDriverWait(ldriver, Duration.ofSeconds(30));
         wt.until(ExpectedConditions.visibilityOf(awardRecognitionObjects.subLinksOfAboutUs));
 
         awardRecognitionObjects.awardRecognitionLink.click();
@@ -49,7 +49,7 @@ public class AwardRecognitionPage extends TestBase {
 
     public void searchForAward(String awardDescription)throws Exception{
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) ldriver;
         js.executeScript("window.scrollBy(0,600)");
 
         awardRecognitionObjects.recognitionsFromPartner.click();

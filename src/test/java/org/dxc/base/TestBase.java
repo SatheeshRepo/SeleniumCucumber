@@ -15,17 +15,21 @@ import org.dxc.constants.GlobalConstants;
 
 public class TestBase extends AbstractTestNGCucumberTests {
 
-    public static WebDriver driver;
+    public static WebDriver ldriver;
     GlobalConstants globalConstants;
-    String browserMode = null;
-    String targetBrowser = null;
-    String environment = null;
+//    String browserMode = null;
+//    String targetBrowser = null;
+//    String environment = null;
+    String browserMode = "headmode";
+    String targetBrowser = "chrome";
+    String environment = "qa";
+    public static Scenario lscenario;
 
-    public void initSetup() throws Exception {
+    public void initSetup(WebDriver driver, Scenario scenario) throws Exception {
         globalConstants = new GlobalConstants();
-        browserMode = System.getProperty("mode");
-        targetBrowser = System.getProperty("browser");
-        environment = System.getProperty("env");
+//        browserMode = System.getProperty("mode");
+//        targetBrowser = System.getProperty("browser");
+//        environment = System.getProperty("env");
         if (browserMode != null && targetBrowser != null && environment != null) {
             if (targetBrowser.equalsIgnoreCase("chrome")) {
                 System.setProperty("webdriver.chrome.driver", globalConstants.chromeDriverPath);
@@ -46,18 +50,23 @@ public class TestBase extends AbstractTestNGCucumberTests {
                     break;
             }
             Thread.sleep(1000);
+            this.ldriver = driver;
+            this.lscenario = scenario;
         }
     }
 
     public WebDriver getDriver() {
-        return driver;
+        return ldriver;
+    }
+    public Scenario getScenario() {
+        return lscenario;
     }
 
     public void tearDown() throws Exception {
         System.out.println("Scenario Execution Completed Successfully");
         //Closing the WebDriver
-        driver.close();
-        driver.quit();
+        ldriver.close();
+        ldriver.quit();
     }
 
     public String[] getBrowserArguments(String browserMode) {
@@ -101,7 +110,7 @@ public class TestBase extends AbstractTestNGCucumberTests {
     }
 
     public static byte[] getByteScreenshot() {
-        byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        byte[] screenshot = ((TakesScreenshot) ldriver).getScreenshotAs(OutputType.BYTES);
         return screenshot;
     }
 

@@ -24,7 +24,7 @@ public class CareerPortalPage extends TestBase{
     public CareerPortalPage()
     {
         globalConstants = new GlobalConstants();
-        generic = new Generic(TestBase.driver);
+        generic = new Generic(TestBase.ldriver,TestBase.lscenario);
         homePage = new HomePage();
         careerPortalObjects = new CareerPortalObjects();
         PageFactory.initElements(getDriver(),careerPortalObjects);
@@ -56,7 +56,7 @@ public class CareerPortalPage extends TestBase{
                 "Filtered Result contains keyword "+keyword);
 
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) ldriver;
         js.executeScript("window.scrollBy(0,1400)");
         generic.waitForMediumTimeOut();
 //        validate Job Alert button is displayed
